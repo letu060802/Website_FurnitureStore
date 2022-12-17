@@ -1,0 +1,20 @@
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/index::dynamic(~{::main})}">
+    <main>
+                <!-- Single Catagory -->
+                <div  th:each="p:${items}" class=" single-products-catagory clearfix ">
+                    <a th:href="@{|/product/detail/${p.id}|}">
+                        <img th:src="@{|/assets/images/${p.image}|}" >
+                        <!-- Hover Content -->
+                        <div class="hover-content">
+                            <div class="line"></div>
+                            <p>$[[${p.price}]]</p>
+                            <h4 th:utext="${p.name}"></h4>
+                        </div>
+                    </a>
+                </div>
+      
+      
+    </main>
+
+
+    

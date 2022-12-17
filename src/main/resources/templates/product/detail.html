@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/index::dynamic(~{::main})}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Product list</title>
+</head>
+
+<body>
+    <main th:object="${item}" class="poly-item-detail">
+        <!-- Product Details Area Start -->
+        <div class="section-padding-100 clearfix">
+            <div class="container-fluid">
+
+                <div class="row">
+                    <div class="col-10">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb mt-50">
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item"><a href="#">Product</a></li>
+                                <li class="breadcrumb-item"><a href="#">Product Detail</a></li>
+                                <li class="breadcrumb-item active" aria-current="page" th:text="*{name}"></li>
+                            </ol>
+                        </nav>
+                    </div>
+                    <!-- Sorting -->
+                    <div class="col-2 product-sorting d-flex">
+                        <div th:replace="/layout/_cart-info.html"></div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div>
+                            <a>
+                                <img th:src="@{|/assets/images/*{image}|}" style="width: 5000px; height: 100%;">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                            <div class="single_product_desc">
+                                <!-- Product Meta Data -->
+                                <div class="product-meta-data">
+                                    <p class="product-price" th:text="*{price}">$180</p>
+                                    <a>
+                                        <h6 th:text="*{name}"></h6>
+                                    </a>
+                                    <!-- Ratings & Review -->
+                                    <div class="ratings-review mb-15 d-flex align-items-center justify-content-between">
+                                        <div class="ratings">
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                        </div>
+                                        <div class="review">
+                                            <a href="#">Write A Review</a>
+                                        </div>
+                                    </div>
+                                    <!-- Avaiable -->
+                                    <p class="avaibility"><i class="fa fa-circle"></i> In Stock</p>
+                                </div>
+
+                                <div class="short_overview my-5">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid quae eveniet
+                                        culpa
+                                        officia quidem mollitia impedit iste asperiores nisi reprehenderit consequatur,
+                                        autem, nostrum pariatur enim?</p>
+                                </div>
+                            </div>
+
+                                <!-- Add to Cart Form -->
+                            <form class="cart clearfix" method="post">
+                                <button th:attr="ng-click=@{|cart.add(${item.id})|}" type="submit" name="addtocart" value="5" class="btn amado-btn">Add to
+                                    cart</button>
+                            </form> 
+
+                    </div>
+                    <div class="col-sm-2">
+                            <div class="panel panel-default">
+                                <div class="panel-heading ">
+                                    <a href="">
+                                        <h3>Similar Products</h3>
+                                    </a>
+                                </div>
+                                <div class="panel-body">
+                                    <ul>
+                                        <li th:each="p:*{category.products}">
+                                            <a th:href="@{|/product/detail/${p.id}|}" th:text="${p.name}"> </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+            <!-- Product Details Area End -->
+    </main>
+</body>
+
+</html>

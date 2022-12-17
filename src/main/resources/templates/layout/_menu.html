@@ -1,0 +1,54 @@
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+</head>
+<div xmlns:th="http://www.thymeleaf.org">
+
+    <!-- Close Icon -->
+    <div class="nav-close">
+        <i class="fa fa-close" aria-hidden="true"></i>
+    </div>
+    <!-- Logo -->
+    <div class="logo">
+        <a href="index.html"><img src="/assets/img/core-img/logo.png" alt=""></a>
+    </div>
+    
+    <!-- Amado Nav -->
+    <nav class="amado-nav">
+    	<ul th:if="${#request.remoteUser}" >
+                <li>
+                    <a class="nav-link" href="#">Welcome [[${#request.remoteUser}]]</a>
+                </li>
+           </ul>
+        <ul>
+            <li class="active"><a th:href="@{/product/index}">Home</a></li>
+            <li class="nav-item"><a th:href="@{/product/shop}">Product</a></li>
+            <th:block th:if="${#request.remoteUser}">
+                <li class="nav-item">
+                    <a th:href="@{/security/logoff}">Sign Out</a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/order/list}">Your Orders</a>
+                </li>
+                <li class="nav-item" th:if="${#request.isUserInRole('DIRE') or #request.isUserInRole('STAF')}">
+                    <a th:href="@{/admin/home/index}">Administration</a>
+                </li>
+            </th:block>
+            <th:block th:unless="${#request.remoteUser}">
+                    <li><a th:href="@{/security/login/form}">Sign in</a></li>
+            </th:block>  
+        </ul>
+        
+    </nav>
+    <!-- Button Group -->
+    <div class="amado-btn-group mt-30 mb-100">
+        <a href="#" class="btn amado-btn mb-15">Discount</a>
+        <a href="#" class="btn amado-btn active">New this week</a>
+    </div>
+    <!-- Cart Menu -->
+    <div class="cart-fav-search mb-100">
+        <a th:href="@{/cart/view}" class="cart-nav"><img src="/assets/img/core-img/cart.png" alt=""> Cart <span>(0)</span></a>
+        <a href="#" class="fav-nav"><img src="/assets/img/core-img/favorites.png" alt=""> Favourite</a>
+        <a href="#" class="search-nav"><img src="/assets/img/core-img/search.png" alt=""> Search</a>
+    </div>
+
+</div>

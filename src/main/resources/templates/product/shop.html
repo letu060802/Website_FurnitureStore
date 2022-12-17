@@ -1,0 +1,44 @@
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/_shop::dynamic(~{::main})}">
+<main>
+    <!-- Single Product Area -->
+    <div th:each="p:${items}" class="col-12 col-sm-6 col-md-12 col-xl-6">
+        <div class="single-product-wrapper">
+            <!-- Product Image -->
+            <div class="product-img">
+                <a th:href="@{|/product/detail/${p.id}|}">
+                    <img th:src="@{|/assets/images/${p.image}|}" >
+                </a>
+            </div>
+
+            <!-- Product Description -->
+            <div class="product-description d-flex align-items-center justify-content-between">
+                <!-- Product Meta Data -->
+                <div class="product-meta-data">
+                    <div class="line"></div>
+                    <p class="product-price">$[[${p.price}]]</p>
+                    <a href="product-details.html">
+                        <h6 th:utext="${p.name}"></h6>
+                    </a>
+                </div>
+                <!-- Ratings & Cart -->
+                <div class="ratings-cart text-right">
+                    <div class="ratings">
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                    </div>
+                    <div class="cart">
+                        <button th:attr="ng-click=@{|cart.add(${p.id})|}" class="btn btn-success">
+                            <i class="glyphicon glyphicon-shopping-cart"></i>    
+                        </button>
+                        <!-- <a th:attr="ng-click=@{|cart.add(${p.id})|}"  title="Add to Cart"><img
+                                src="/assets/img/core-img/cart.png" alt=""></a> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
